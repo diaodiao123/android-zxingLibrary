@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 final class CameraConfigurationManager {
@@ -82,12 +83,23 @@ final class CameraConfigurationManager {
     void setDesiredCameraParameters(Camera camera) {
         Camera.Parameters parameters = camera.getParameters();
         Log.d(TAG, "Setting preview size: " + cameraResolution);
-        parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
+        List<Camera.Size> supportedPreviewSizes = parameters.getSupportedPreviewSizes();
+        int position =0;
+        if(supportedPreviewSizes.size()>2){
+            position=supportedPreviewSizes.size()/2+1;//supportedPreviewSizes.get();
+        }else {
+            position=supportedPreviewSizes.size()/2;
+        }
+
+        int width = supportedPreviewSizes.get(position).width;
+        int height = supportedPreviewSizes.get(position).height;
+        Log.d(TAG, "Setting preview size: " + cameraResolution);
+        camera.setDisplayOrientation(90);
+        cameraResolution.x=width;
+        cameraResolution.y=height;
+        parameters.setPreviewSize(width,height);
         setFlash(parameters);
         setZoom(parameters);
-        //setSharpness(parameters);
-        //modify here
-        camera.setDisplayOrientation(90);
         camera.setParameters(parameters);
     }
 
