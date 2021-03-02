@@ -52,6 +52,8 @@ public final class ViewfinderView extends View {
     private final int resultPointColor;
     private Collection<ResultPoint> possibleResultPoints;
     private Collection<ResultPoint> lastPossibleResultPoints;
+    public static Double mWidth=0.5;
+    public static Double mHeight=0.5;
 
     public ViewfinderView(Context context) {
         this(context, null);
@@ -93,10 +95,10 @@ public final class ViewfinderView extends View {
         }
 
         // 扫描框的宽度
-        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, (float) (DisplayUtil.screenWidthPx*mWidth));
 
         // 扫描框的高度
-        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, (float) (DisplayUtil.screenWidthPx*mWidth));
 
         // 扫描框边角颜色
         innercornercolor = ta.getColor(R.styleable.ViewfinderView_inner_corner_color, Color.parseColor("#45DDDD"));
