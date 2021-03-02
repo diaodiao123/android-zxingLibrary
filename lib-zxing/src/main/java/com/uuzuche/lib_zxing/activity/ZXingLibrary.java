@@ -32,7 +32,7 @@ public class ZXingLibrary {
      * @param width
      * @param height
      */
-    public void setScanWidthAndHeight(Double width,Double height){
+    public static void setScanWidthAndHeight(Double width,Double height){
         ViewfinderView.mWidth=width;
         ViewfinderView.mHeight=height;
     }
